@@ -30,6 +30,11 @@ class Counter extends Component {
     console.log('-----')
   }
 
+  shouldComponentUpdate(nextProps, nextState) { // Lets React know whether to trigger render or not
+    // Only useful for fine optimisation
+    return true // True will trigger render, and vice versa
+  }
+
   render() {
     console.log('render')
     return (
@@ -47,7 +52,7 @@ class Counter extends Component {
     console.log('componentDidUpdate')
     console.log('-----')
   }
-  componentWillUnmount() {
+  componentWillUnmount() { // Called when a component is taken out of DOM
     console.log('componentWillUnmount');
     console.log('-------------')
   }
