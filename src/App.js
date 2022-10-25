@@ -1,41 +1,42 @@
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
+import Counter from './Counter'
 
-class Counter extends Component {
+class App extends Component {
   constructor(props) {
-    console.log('Constructor')
     super(props)
 
     this.state = {
-      counter: 0,
+      mount: 0,
     }
 
-    this.increment = this.increment.bind(this);
-    this.decrement = this.decrement.bind(this);
+    this.mountCounter = this.mountCounter.bind(this);
+    this.unmountCounter = this.unmountCounter.bind(this);
   }
 
-  increment() {
+  mountCounter() {
     this.setState({
-      counter: this.state.counter + 1,
+      mount: true,
     })
   }
 
-  decrement() {
+  unmountCounter() {
     this.setState({
-      counter: this.state.counter - 1,
+      mount: false,
     })
   }
 
   render() {
     return (
       <div>
-        <button onClick={this.increment}>Increment</button>
-        <button onClick={this.decrement}>Decrement</button>
+        <button onClick={this.mountCounter}>Mount</button>
+        <button onClick={this.unmountCounter}>Unmount</button>
         <div>
-          Counter: {this.state.counter}
+          {this.state.mount ? < Counter />: null}
         </div>
       </div>
     )
   }
 }
 
-export default Counter
+export default App
