@@ -25,13 +25,21 @@ class Counter extends Component {
     })
   }
 
+  static getDerivedStateFromProps(props, state) {
+    
+  }
+
   componentDidMount() {
     console.log('componentDidMount')
     console.log('-----')
   }
 
   shouldComponentUpdate(nextProps, nextState) { // Lets React know whether to trigger render or not
-    // Only useful for fine optimisation
+    // Only useful for fine optimisation. You can LOSE performance if you use this method incorrectly.
+    if (nextProps.ignoreProp && this.state.ignoreProp !== nextProps.ignoreProp) {
+        console.log('shouldComponentUpdate - DO NOT RENDER')
+        return false
+    }
     return true // True will trigger render, and vice versa
   }
 

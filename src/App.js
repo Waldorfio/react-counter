@@ -8,10 +8,15 @@ class App extends Component {
 
     this.state = {
       mount: 0,
+      ignoreProp: 0,
+      seed: 40,
     }
 
-    this.mountCounter = this.mountCounter.bind(this);
-    this.unmountCounter = this.unmountCounter.bind(this);
+    this.mountCounter = () => this.setState({mount: true});
+    this.unmountCounter = () => this.setState({mount: false})
+
+    this.ignoreProp = () => this.setState({ignoreProp: Math.random()});
+    this.seedGenerator = () => this.setState({seed: Number.parseInt(Math.random())})
   }
 
   mountCounter() {
@@ -31,9 +36,11 @@ class App extends Component {
       <div>
         <button onClick={this.mountCounter}>Mount</button>
         <button onClick={this.unmountCounter}>Unmount</button>
-        <div>
-          {this.state.mount ? < Counter />: null}
-        </div>
+        <button onClick={this.ignoreProp}>Ignore Prop</button>
+          {this.state.mount ? 
+            < Counter 
+              ignoreProp={this.state.ignoreProp}
+            />: null}
       </div>
     )
   }
