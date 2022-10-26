@@ -7,6 +7,7 @@ class Counter extends Component {
 
     this.state = {
       counter: 0,
+      seed: 0,
     }
 
     this.increment = this.increment.bind(this);
@@ -26,7 +27,14 @@ class Counter extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    
+    if(props.seed && state.seed !==props.seed) {
+        return {
+            seed: props.seed,
+            counter: props.seed,
+        }
+    }
+
+    return null
   }
 
   componentDidMount() {
@@ -41,6 +49,10 @@ class Counter extends Component {
         return false
     }
     return true // True will trigger render, and vice versa
+  }
+
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    return null
   }
 
   render() {

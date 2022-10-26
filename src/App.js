@@ -16,19 +16,7 @@ class App extends Component {
     this.unmountCounter = () => this.setState({mount: false})
 
     this.ignoreProp = () => this.setState({ignoreProp: Math.random()});
-    this.seedGenerator = () => this.setState({seed: Number.parseInt(Math.random())})
-  }
-
-  mountCounter() {
-    this.setState({
-      mount: true,
-    })
-  }
-
-  unmountCounter() {
-    this.setState({
-      mount: false,
-    })
+    this.seedGenerator = () => this.setState({seed: Number.parseInt(Math.random()*100)})
   }
 
   render() {
@@ -37,9 +25,11 @@ class App extends Component {
         <button onClick={this.mountCounter}>Mount</button>
         <button onClick={this.unmountCounter}>Unmount</button>
         <button onClick={this.ignoreProp}>Ignore Prop</button>
+        <button onClick={this.seedGenerator}>Seed Generator</button>
           {this.state.mount ? 
             < Counter 
               ignoreProp={this.state.ignoreProp}
+              seed={this.state.seed}
             />: null}
       </div>
     )
