@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+const ErrorComponent = () => <div>{props.nonExisstantProps}</div>   // Custom fake empty variable, to trigger error
+
 class Counter extends Component {
   constructor(props) {
     console.log('Constructor')
@@ -52,6 +54,7 @@ class Counter extends Component {
   }
 
   getSnapshotBeforeUpdate(prevProps, prevState) {
+    console.log('Get Snapshot before update')
     return null
   }
 
@@ -64,6 +67,7 @@ class Counter extends Component {
         <div>
           Counter: {this.state.counter}
         </div>
+        <ErrorComponent />
       </div>
     )
   }
@@ -75,6 +79,9 @@ class Counter extends Component {
   componentWillUnmount() { // Called when a component is taken out of DOM
     console.log('componentWillUnmount');
     console.log('-------------')
+  }
+  componentDidCatch(error, info) {  // Handles any errors we run into
+    console.log('component caught error')
   }
 }
 
